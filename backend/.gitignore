@@ -1,0 +1,58 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+*.pyo
+.Python
+*.egg-info/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+
+# Virtual environments
+.venv
+
+
+
+# ── Evaluation artifacts ──────────────────────────────────────────────────────
+# Results JSON files are committed — they are your eval history.
+# But exclude local scratch files.
+evaluation/results/.scratch/
+
+# ── Jupyter (if used for exploration) ────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Docker ────────────────────────────────────────────────────────────────────
+# Data volumes are managed by Docker, not git.
+qdrant_data/
+redis_data/
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+ 
+# ── Model artifacts (if any local models downloaded) ─────────────────────────
+models/
+*.bin
+*.safetensors
+
+
+# ── Secrets — NEVER commit these ──────────────────────────────────────────────
+.env
+*.pem
+*.key

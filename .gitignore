@@ -1,0 +1,98 @@
+# ── Secrets / credentials ────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.kubeconfig
+*credentials*
+*secrets*
+*token*
+*.secret
+
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+build/
+dist/
+wheels/
+*.egg-info/
+.eggs/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# ── Virtual environments / local tooling ─────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Local databases / runtime state ──────────────────────────────────────────
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+*.duckdb
+*.duckdb-*
+checkpoints.db*
+
+# ── Vector stores / service data volumes ─────────────────────────────────────
+qdrant_storage/
+qdrant_data/
+redis_data/
+chroma/
+chromadb/
+faiss_index/
+storage/
+data/
+
+# ── Logs / reports / scratch output ──────────────────────────────────────────
+*.log
+logs/
+tmp/
+temp/
+.tmp/
+.cache/
+scratch/
+evaluation/results/.scratch/
+
+# ── Notebooks / local exploration ────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Model artifacts / large binaries ─────────────────────────────────────────
+models/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.onnx
+
+# ── Editors / OS files ───────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Docker / compose local overrides ─────────────────────────────────────────
+docker-compose.override.yml
+compose.override.yml

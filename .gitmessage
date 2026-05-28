@@ -1,0 +1,53 @@
+# <type>(<scope>): <short summary>
+# (Max 50 characters; provide a concise description of the change)
+
+# Body:
+# - What: Clearly explain what has changed in this commit.
+# - Why: Explain why the changes were necessary.
+# - How: Highlight any implementation details or decisions made.
+# - Notes: Include any information useful for reviewers (e.g., impacted modules).
+# - Wrap all lines at 72 characters.
+
+# Example:
+# feat(auth): add JWT-based authentication
+#
+# - What: Added login, registration, and JWT token generation functionality.
+# - Why: To enable secure user authentication for the platform.
+# - How: Integrated Passport.js with the `AuthModule`, added strategies for
+#   local and JWT authentication, and created guards for route protection.
+# - Notes: Tested with Postman, added unit tests for `AuthService`.
+
+# Footer:
+# - BREAKING CHANGE: Use this if the commit introduces breaking changes.
+#   Describe the nature of the breaking change and any migration steps needed.
+# - References: Include issue IDs or PR links (e.g., Closes #123, Fixes #456).
+
+# Types:
+# feat: A new feature
+# fix: A bug fix
+# docs: Documentation changes
+# style: Code style changes (formatting, etc., no logic changes)
+# refactor: Refactoring code without changing behavior
+# test: Adding or updating tests
+# chore: Maintenance or non-user-facing changes
+# build: Changes to build or CI/CD processes
+# perf: Performance improvements
+# ci: Continuous integration-related changes
+
+# Scopes:
+# Use the name of the affected module or feature:
+# - auth: Authentication and authorization
+# - users: User management
+# - database: Database-related changes
+# - config: Configuration files or environment variables
+# - services: Service layer changes
+# - controllers: Controller layer changes
+# - middleware: Middleware-related updates
+# - scripts: Development or build scripts
+# - tests: Testing-related changes
+# - docs: Documentation or README changes
+
+# Example Footer:
+# BREAKING CHANGE: Updated the database schema for the User table.
+# - Migration steps: Run `npm run migrate` to apply changes.
+# Closes #123, Fixes #456

@@ -1,0 +1,66 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Adaptive Multi-Agent RAG System — Local Infrastructure
+#
+# Two services only:
+#   1. Qdrant  — vector store (dense + sparse hybrid search)
+#   2. Redis   — semantic cache layer (Phase 3, started now to lock config)
+#
+# Why version 3.9? Stable, widely supported, no Compose v2 migration gotchas.
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.18.0
+    # Pinning to v1.9.2 deliberately.
+    # Qdrant v1.9+ is required for stable sparse vector support (BM25 path).
+    # Never use `latest` in a project you're evaluating — you need reproducibility.
+    container_name: adaptive_rag_qdrant
+    ports:
+      - "6333:6333" # REST API — this is what our Python client uses
+      - "6334:6334" # gRPC — available for high-throughput production use
+    volumes:
+      - qdrant_data:/qdrant/storage
+      # Named volume = data persists across container restarts.
+      # If you used a bind mount (./data:/qdrant/storage), it works but
+      # creates OS permission issues on some machines. Named volume avoids that.
+    environment:
+      - QDRANT__SERVICE__GRPC_PORT=6334
+      - QDRANT__LOG_LEVEL=INFO
+    healthcheck:
+      # test: ["CMD-SHELL", "curl -f http://localhost:6333/healthz || exit 1"]
+      test:
+        [
+          "CMD-SHELL",
+          "timeout 5 bash -c 'cat < /dev/null > /dev/tcp/localhost/6333' && echo ok",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  redis:
+    image: redis:8.6.3-alpine
+    # Alpine variant: ~30MB vs ~100MB for full Redis.
+    container_name: adaptive_rag_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+    # --appendonly yes     → persist writes to disk (survives restarts)
+    # --maxmemory 512mb    → cap memory usage, don't let cache grow unbounded
+    # --maxmemory-policy allkeys-lru → evict least recently used keys when full
+    #   This is exactly what you want for a semantic cache: old queries evicted first.
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  qdrant_data:
+  redis_data:
+  # Both declared here so Docker manages lifecycle.
+  # `docker compose down` preserves data.
+  # `docker compose down -v` wipes it. Know the difference.

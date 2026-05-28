@@ -1,0 +1,67 @@
+[tool.uv]
+package = true
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "adaptive-multi-agent-rag"
+version = "0.1.0"
+requires-python = ">=3.11,<3.14"
+
+dependencies = [
+
+  # ── Core LangGraph / LangChain ─────────────────────────────
+  "langgraph>=0.4,<0.6",
+  "langgraph-checkpoint-sqlite>=2.0,<3.0",
+  "langchain>=0.3.20,<0.5",
+  "langchain-openai>=0.3.10,<0.4",
+  "langchain-community>=0.3.15,<0.5",
+  "langchain-qdrant>=0.2.0,<0.3",
+
+  # ── Vector Store ───────────────────────────────────────────
+  "qdrant-client>=1.11,<2.0",
+
+  # ── OpenAI / Tokenization ──────────────────────────────────
+  "openai>=1.75,<2.0",
+  "tiktoken>=0.9,<1.0",
+
+  # ── Sparse / Hybrid Search ─────────────────────────────────
+  "fastembed>=0.5,<0.7",
+
+  # ── Chunking ───────────────────────────────────────────────
+  "langchain-text-splitters>=0.3.6,<0.5",
+
+  # ── Evaluation ─────────────────────────────────────────────
+  "ragas>=0.2.10,<0.3",
+  "datasets>=3.2,<4.0",
+
+  # ── Memory / Cache ─────────────────────────────────────────
+  "redis[hiredis]>=5.2,<6.0",
+  "mem0ai>=0.1.50,<0.2",
+
+  # ── API Layer ──────────────────────────────────────────────
+  "fastapi>=0.115,<0.120",
+  "uvicorn[standard]>=0.34,<0.39",
+  "pydantic>=2.10,<3.0",
+  "pydantic-settings>=2.7,<3.0",
+  "python-dotenv>=1.1,<2.0",
+
+  # ── Observability ──────────────────────────────────────────
+  "langsmith>=0.3,<0.5",
+
+  # ── Utilities ──────────────────────────────────────────────
+  "numpy>=2.0,<3.0",
+  "httpx>=0.28,<1.0",
+  "tenacity>=9.0,<10.0",
+  "structlog>=24.4,<26.0",
+
+  "onnxruntime>=1.18,<1.21",
+]
+
+[project.scripts]
+setup-qdrant = "ingestion.indexer:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["agents", "ingestion", "graph", "memory", "evaluation", "api"]
