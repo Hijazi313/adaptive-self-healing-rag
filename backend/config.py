@@ -68,9 +68,9 @@ class Settings(BaseSettings):
     mem0_api_key: str = Field(default="")
 
     # ── Retrieval ─────────────────────────────────────────────────────────────
-    retrieval_top_k: int = Field(default=10)
+    retrieval_top_k: int = Field(default=5)
     max_retrieval_retries: int = Field(default=3)
-    critic_relevance_threshold: float = Field(default=0.7)
+    critic_relevance_threshold: float = Field(default=0.75)
 
     # ── Chunking ──────────────────────────────────────────────────────────────
     default_chunk_strategy: str = Field(default="recursive")
