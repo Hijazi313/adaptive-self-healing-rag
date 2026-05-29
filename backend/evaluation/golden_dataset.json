@@ -1,0 +1,410 @@
+[
+  {
+    "id": "db_001",
+    "question": "What is database connection pooling and why is it used?",
+    "ground_truth": "Database connection pooling is a technique that maintains a cache of reusable database connections so that new connections do not need to be established for every request. It is used to reduce the overhead of creating and closing connections repeatedly, improve application performance, limit the number of concurrent connections to the database, and handle connection reuse efficiently under high load.",
+    "source_document": "database_fundamentals.txt",
+    "category": "database",
+    "difficulty": "basic"
+  },
+  {
+    "id": "db_002",
+    "question": "What causes a database connection timeout error?",
+    "ground_truth": "A database connection timeout occurs when a client cannot establish a connection to the database within a configured time limit. Common causes include: the database server being unreachable or down, network latency or firewall rules blocking the connection, the connection pool being exhausted with no available connections, the database being overloaded and not responding in time, or incorrect host, port, or authentication configuration.",
+    "source_document": "database_fundamentals.txt",
+    "category": "database",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "db_003",
+    "question": "What is the difference between optimistic and pessimistic locking?",
+    "ground_truth": "Optimistic locking assumes conflicts are rare and allows concurrent reads without locking, checking for conflicts only at write time using a version number or timestamp. If a conflict is detected, the transaction is rolled back and retried. Pessimistic locking assumes conflicts are likely and locks records when they are read, preventing other transactions from modifying them until the lock is released. Optimistic locking has higher throughput under low contention; pessimistic locking is safer under high contention.",
+    "source_document": "database_fundamentals.txt",
+    "category": "database",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "db_004",
+    "question": "What is the N+1 query problem?",
+    "ground_truth": "The N+1 query problem occurs when an application executes one query to retrieve N parent records, then executes an additional query for each parent to retrieve its related child records — resulting in N+1 total queries instead of one. This causes significant performance degradation as N grows. The solution is to use eager loading or JOIN queries to fetch related data in a single database call.",
+    "source_document": "database_fundamentals.txt",
+    "category": "database",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "db_005",
+    "question": "What does ACID stand for in database transactions?",
+    "ground_truth": "ACID stands for Atomicity, Consistency, Isolation, and Durability. Atomicity means a transaction either completes fully or not at all. Consistency ensures the database moves from one valid state to another. Isolation means concurrent transactions execute as if they were sequential. Durability guarantees that committed transactions survive system failures.",
+    "source_document": "database_fundamentals.txt",
+    "category": "database",
+    "difficulty": "basic"
+  },
+  {
+    "id": "db_006",
+    "question": "What is a database index and when should you not use one?",
+    "ground_truth": "A database index is a data structure that improves the speed of data retrieval by providing a fast lookup path to rows. You should avoid indexes when: the table is small and a full scan is faster, the column has very low cardinality (e.g. a boolean column), the table receives far more writes than reads (indexes slow down INSERT, UPDATE, DELETE), or the column is rarely used in WHERE or JOIN clauses. Indexes trade write performance and storage for read performance.",
+    "source_document": "database_fundamentals.txt",
+    "category": "database",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "db_007",
+    "question": "What is the difference between a clustered and non-clustered index?",
+    "ground_truth": "A clustered index determines the physical order of data in a table — the table rows are stored in index order. There can be only one clustered index per table. A non-clustered index is a separate structure that stores a copy of the indexed column values along with a pointer to the corresponding row. Multiple non-clustered indexes can exist per table. Clustered indexes are faster for range queries; non-clustered indexes add lookup overhead but do not affect row storage order.",
+    "source_document": "database_fundamentals.txt",
+    "category": "database",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "api_001",
+    "question": "What is the difference between REST and GraphQL?",
+    "ground_truth": "REST is an architectural style where each resource has a fixed URL and returns a fixed data shape. Clients may over-fetch (receiving more data than needed) or under-fetch (requiring multiple requests). GraphQL is a query language where the client specifies exactly what fields it needs in a single request, eliminating over-fetching and under-fetching. REST uses HTTP verbs (GET, POST, PUT, DELETE) for operations; GraphQL uses a single POST endpoint with typed queries and mutations.",
+    "source_document": "api_design.txt",
+    "category": "api_design",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "api_002",
+    "question": "What is idempotency in API design and which HTTP methods should be idempotent?",
+    "ground_truth": "Idempotency means that making the same request multiple times produces the same result as making it once. GET, PUT, DELETE, and HEAD should be idempotent by design. POST is not idempotent — calling it multiple times creates multiple resources. PATCH may or may not be idempotent depending on implementation. Idempotency is critical for safe retries in distributed systems where requests may be delivered more than once due to network failures.",
+    "source_document": "api_design.txt",
+    "category": "api_design",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "api_003",
+    "question": "What is rate limiting and what are common strategies for implementing it?",
+    "ground_truth": "Rate limiting controls the number of requests a client can make to an API within a time window to prevent abuse and ensure fair resource usage. Common strategies include: fixed window (count requests in fixed time buckets), sliding window (count requests in a rolling time window), token bucket (refill tokens at a fixed rate, consume one per request), and leaky bucket (process requests at a constant rate, queue or drop excess). Token bucket is most common for burst-tolerant rate limiting.",
+    "source_document": "api_design.txt",
+    "category": "api_design",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "api_004",
+    "question": "What is the purpose of an API gateway?",
+    "ground_truth": "An API gateway is a single entry point for all client requests to backend services. It handles cross-cutting concerns including: request routing to appropriate microservices, authentication and authorization, rate limiting, SSL termination, request/response transformation, caching, load balancing, and observability (logging, tracing). It decouples clients from the internal service architecture and allows backend services to evolve independently.",
+    "source_document": "api_design.txt",
+    "category": "api_design",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "api_005",
+    "question": "What is the difference between authentication and authorization?",
+    "ground_truth": "Authentication is the process of verifying who a user is — confirming their identity using credentials such as passwords, tokens, or certificates. Authorization is the process of determining what an authenticated user is permitted to do — which resources they can access and what actions they can perform. Authentication always happens before authorization. A user can be authenticated but not authorized to access a specific resource.",
+    "source_document": "api_design.txt",
+    "category": "api_design",
+    "difficulty": "basic"
+  },
+  {
+    "id": "api_006",
+    "question": "What is OAuth2 and how does the authorization code flow work?",
+    "ground_truth": "OAuth2 is an authorization framework that allows third-party applications to access user resources without exposing credentials. In the authorization code flow: the client redirects the user to the authorization server, the user authenticates and grants permission, the server redirects back with an authorization code, the client exchanges the code for an access token and refresh token via a server-to-server call. The access token is used for API requests. The authorization code flow is most secure because tokens are never exposed to the browser.",
+    "source_document": "api_design.txt",
+    "category": "api_design",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "dist_001",
+    "question": "What is the CAP theorem?",
+    "ground_truth": "The CAP theorem states that a distributed system can guarantee at most two of three properties simultaneously: Consistency (every read returns the most recent write or an error), Availability (every request receives a response, though it may not be the most recent), and Partition tolerance (the system continues operating despite network partitions). Since network partitions are inevitable in distributed systems, the practical choice is between CP (consistency over availability) and AP (availability over consistency).",
+    "source_document": "distributed_systems.txt",
+    "category": "distributed_systems",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "dist_002",
+    "question": "What is eventual consistency and when is it acceptable?",
+    "ground_truth": "Eventual consistency is a consistency model where, given no new updates, all replicas will eventually converge to the same value. Reads may return stale data temporarily. It is acceptable in use cases where temporary inconsistency does not cause business harm — such as social media likes, product view counts, DNS propagation, and shopping cart totals. It is not acceptable where correctness is critical, such as financial transactions or inventory management that must not oversell.",
+    "source_document": "distributed_systems.txt",
+    "category": "distributed_systems",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "dist_003",
+    "question": "What is a message queue and what problem does it solve?",
+    "ground_truth": "A message queue is a component that stores messages from producers and delivers them to consumers asynchronously. It solves the problem of temporal coupling between services — a producer can send a message without the consumer being available, and the consumer processes it when ready. This enables load leveling (absorbing traffic spikes), decoupling of services, guaranteed delivery, and retry on failure. Common implementations include RabbitMQ, Apache Kafka, and AWS SQS.",
+    "source_document": "distributed_systems.txt",
+    "category": "distributed_systems",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "dist_004",
+    "question": "What is the difference between horizontal and vertical scaling?",
+    "ground_truth": "Vertical scaling (scaling up) means adding more resources to an existing machine — more CPU, RAM, or storage. It has an upper bound set by available hardware and usually requires downtime. Horizontal scaling (scaling out) means adding more machines to distribute load. It has no theoretical upper bound and supports fault tolerance. Most modern distributed systems prefer horizontal scaling with stateless services, using a load balancer to distribute requests across instances.",
+    "source_document": "distributed_systems.txt",
+    "category": "distributed_systems",
+    "difficulty": "basic"
+  },
+  {
+    "id": "dist_005",
+    "question": "What is a circuit breaker pattern and why is it used?",
+    "ground_truth": "The circuit breaker pattern prevents cascading failures in distributed systems. When a downstream service begins failing, the circuit breaker tracks the failure rate. Once it exceeds a threshold, the circuit opens and subsequent calls fail immediately without contacting the downstream service, allowing it time to recover. After a timeout, the circuit enters a half-open state and allows a test request. If it succeeds, the circuit closes. This prevents the caller from wasting resources on a service that is known to be unavailable.",
+    "source_document": "distributed_systems.txt",
+    "category": "distributed_systems",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "dist_006",
+    "question": "What is a distributed transaction and what are the alternatives?",
+    "ground_truth": "A distributed transaction coordinates writes across multiple services or databases such that all succeed or all fail together. The two-phase commit protocol (2PC) is the classic implementation but is slow and creates a single point of failure at the coordinator. Alternatives include: the Saga pattern (a sequence of local transactions with compensating rollback transactions on failure), eventual consistency with event-driven coordination, and outbox pattern with transactional messaging to guarantee at-least-once delivery.",
+    "source_document": "distributed_systems.txt",
+    "category": "distributed_systems",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "dist_007",
+    "question": "What is consistent hashing and where is it used?",
+    "ground_truth": "Consistent hashing is a technique for distributing keys across a changing set of nodes such that adding or removing a node remaps only a minimal fraction of keys. In a standard hash ring, each node owns a range of the hash space. When a node is added, only its neighbors' keys are remapped. It is used in distributed caches (Redis Cluster, Memcached), distributed databases, and load balancers to minimize cache invalidation and data movement during topology changes.",
+    "source_document": "distributed_systems.txt",
+    "category": "distributed_systems",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "vec_001",
+    "question": "What is a vector database and how does it differ from a relational database?",
+    "ground_truth": "A vector database stores and queries high-dimensional vector embeddings using approximate nearest-neighbor algorithms. It is optimized for similarity search — finding vectors closest to a query vector in embedding space. A relational database stores structured tabular data and is optimized for exact lookups and joins based on equality or range conditions. Vector databases are used in semantic search, recommendation systems, and RAG pipelines; relational databases are used for transactional data with strict schema requirements.",
+    "source_document": "vector_search.txt",
+    "category": "vector_search",
+    "difficulty": "basic"
+  },
+  {
+    "id": "vec_002",
+    "question": "What is HNSW and why is it used for vector search?",
+    "ground_truth": "HNSW (Hierarchical Navigable Small World) is an approximate nearest-neighbor algorithm that builds a multi-layer graph structure. The top layers have long-range connections for fast navigation; the bottom layers have dense local connections for precise search. It offers excellent query speed and recall tradeoffs and is the dominant algorithm for production vector search. It is used in Qdrant, Weaviate, Faiss, and other vector stores because it scales to hundreds of millions of vectors while maintaining sub-millisecond query latency.",
+    "source_document": "vector_search.txt",
+    "category": "vector_search",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "vec_003",
+    "question": "What is the difference between dense and sparse vector representations?",
+    "ground_truth": "Dense vectors are fixed-length float arrays where most elements are non-zero, produced by neural embedding models. They capture semantic meaning — similar concepts have similar vectors. Sparse vectors have mostly zero values with only a few non-zero entries, representing token weights (as in BM25 or SPLADE). Dense vectors excel at conceptual similarity; sparse vectors excel at exact keyword matching. Hybrid search combines both to handle a wider range of query types effectively.",
+    "source_document": "vector_search.txt",
+    "category": "vector_search",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "vec_004",
+    "question": "What is cosine similarity and why is it used for comparing embeddings?",
+    "ground_truth": "Cosine similarity measures the cosine of the angle between two vectors, ranging from -1 to 1. A score of 1 means vectors point in the same direction (maximally similar), 0 means orthogonal (unrelated), and -1 means opposite. It is used for embeddings because it measures directional alignment independent of vector magnitude. Most embedding models produce L2-normalized unit vectors, for which cosine similarity equals dot product — making it computationally efficient.",
+    "source_document": "vector_search.txt",
+    "category": "vector_search",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "vec_005",
+    "question": "What is Reciprocal Rank Fusion and how does it combine search results?",
+    "ground_truth": "Reciprocal Rank Fusion (RRF) is a score fusion algorithm that combines ranked result lists from multiple retrieval methods without requiring calibrated scores. For each document, its RRF score is the sum of 1/(k + rank) across all result lists, where k is a constant (typically 60) that prevents high ranks from dominating. Documents appearing in multiple lists receive higher scores. It is used in hybrid search to merge dense and sparse retrieval rankings into a single result list.",
+    "source_document": "vector_search.txt",
+    "category": "vector_search",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "rag_001",
+    "question": "What is Retrieval-Augmented Generation?",
+    "ground_truth": "Retrieval-Augmented Generation (RAG) is a technique that enhances LLM responses by retrieving relevant external documents at query time and including them in the prompt as context. This allows the model to answer questions about information it was not trained on, reduces hallucination by grounding answers in retrieved evidence, and enables knowledge updates without retraining. The core pipeline is: embed the query, retrieve similar chunks from a vector store, pass chunks as context to the LLM, generate a grounded answer.",
+    "source_document": "rag_systems.txt",
+    "category": "rag",
+    "difficulty": "basic"
+  },
+  {
+    "id": "rag_002",
+    "question": "What is HyDE and why does it improve retrieval?",
+    "ground_truth": "HyDE (Hypothetical Document Embedding) generates a hypothetical answer to the query using an LLM, then embeds the hypothetical answer instead of the original query for retrieval. This improves retrieval because short queries produce sparse embeddings that may not align well with long, information-dense document chunks in the same embedding space. A hypothetical answer has similar vocabulary and structure to real answer documents, placing it closer to relevant chunks in vector space.",
+    "source_document": "rag_systems.txt",
+    "category": "rag",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "rag_003",
+    "question": "What is the difference between context precision and context recall in RAG evaluation?",
+    "ground_truth": "Context precision measures the proportion of retrieved chunks that are actually relevant to the query — a retrieval noise metric. High precision means most retrieved chunks contributed to the answer. Context recall measures whether all the information needed to answer the query was present in the retrieved chunks — a completeness metric. High recall means no necessary information was missed. A good RAG system needs both: precise retrieval with no noise and complete retrieval with no gaps.",
+    "source_document": "rag_systems.txt",
+    "category": "rag",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "rag_004",
+    "question": "What is chunking and why does chunk size matter in RAG?",
+    "ground_truth": "Chunking is the process of splitting source documents into smaller segments for embedding and retrieval. Chunk size is a critical hyperparameter: small chunks improve context precision (less irrelevant content per chunk) but may miss context that spans chunk boundaries. Large chunks improve context recall (more complete information per chunk) but introduce noise that reduces precision and wastes LLM context window space. Optimal chunk size depends on the document type and average query complexity.",
+    "source_document": "rag_systems.txt",
+    "category": "rag",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "rag_005",
+    "question": "What is faithfulness in RAG evaluation?",
+    "ground_truth": "Faithfulness measures whether every claim in the generated answer can be directly inferred from the retrieved context. It is computed as the ratio of supported claims to total claims in the answer. A faithfulness score of 1.0 means the answer is fully grounded in the retrieved context with no hallucinated information. A score below 1.0 means the LLM made claims not present in the retrieved chunks — hallucination proportional to the deficit.",
+    "source_document": "rag_systems.txt",
+    "category": "rag",
+    "difficulty": "basic"
+  },
+  {
+    "id": "rag_006",
+    "question": "What is proposition-level chunking?",
+    "ground_truth": "Proposition-level chunking converts paragraphs into atomic, self-contained factual statements before embedding. Each proposition is independently retrievable and answers one specific fact. This approach maximizes context precision because each retrieved unit contains exactly one fact — no surrounding noise. It is more expensive than recursive chunking because it requires an LLM call per paragraph. It is most beneficial for dense factual documents where multi-fact chunks degrade retrieval precision.",
+    "source_document": "rag_systems.txt",
+    "category": "rag",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sys_001",
+    "question": "What is a load balancer and what algorithms do they use?",
+    "ground_truth": "A load balancer distributes incoming requests across multiple backend servers to prevent any single server from becoming a bottleneck. Common algorithms include: round-robin (distribute sequentially), weighted round-robin (distribute proportionally to server capacity), least connections (route to the server with fewest active connections), IP hash (route based on client IP for session affinity), and random. Least connections is most effective when requests have variable processing time.",
+    "source_document": "system_design.txt",
+    "category": "system_design",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sys_002",
+    "question": "What is a CDN and what types of content benefit most from it?",
+    "ground_truth": "A Content Delivery Network (CDN) is a geographically distributed network of proxy servers that cache content close to end users, reducing latency and origin server load. Content that benefits most includes: static assets (images, CSS, JavaScript, fonts), video streams, large file downloads, and API responses with high cache hit rates. Dynamic, personalized, or frequently updated content benefits less because it cannot be effectively cached. CDNs also provide DDoS protection by absorbing traffic at the edge.",
+    "source_document": "system_design.txt",
+    "category": "system_design",
+    "difficulty": "basic"
+  },
+  {
+    "id": "sys_003",
+    "question": "What is a write-through cache versus a write-back cache?",
+    "ground_truth": "In a write-through cache, every write operation updates both the cache and the backing store synchronously before acknowledging success. This ensures consistency but adds write latency. In a write-back (write-behind) cache, writes update only the cache and are asynchronously persisted to the backing store later. This improves write throughput but risks data loss if the cache fails before the write is persisted. Write-through is safer; write-back is faster.",
+    "source_document": "system_design.txt",
+    "category": "system_design",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sys_004",
+    "question": "What is sharding in the context of databases?",
+    "ground_truth": "Sharding is horizontal partitioning of a database where data is split across multiple database instances (shards), each holding a subset of the data. A shard key determines which shard stores each record. Sharding enables horizontal scaling beyond what a single database instance can handle and isolates failures to individual shards. Trade-offs include: cross-shard queries become expensive, re-sharding when data grows unevenly is complex, and transactions across shards require distributed coordination.",
+    "source_document": "system_design.txt",
+    "category": "system_design",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "sys_005",
+    "question": "What is the outbox pattern and what problem does it solve?",
+    "ground_truth": "The outbox pattern solves the dual-write problem — the inability to atomically write to a database and publish a message to a message broker in a single transaction. Instead, the service writes both the business data and the outgoing message to an outbox table in the same local database transaction. A separate message relay process reads the outbox and publishes messages to the broker, then deletes them. This guarantees at-least-once delivery and eliminates the risk of data being written but the event never published.",
+    "source_document": "system_design.txt",
+    "category": "system_design",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "ml_001",
+    "question": "What is the difference between a model's training data cutoff and its knowledge?",
+    "ground_truth": "A model's training data cutoff is the date after which no new data was included in training. Events after this date are unknown to the model from its parametric knowledge. However, the cutoff does not define the boundary of useful knowledge — models often have weaker knowledge of events close to the cutoff because less data about recent events was available at training time. RAG systems extend model knowledge beyond the cutoff by retrieving current documents at inference time.",
+    "source_document": "ml_fundamentals.txt",
+    "category": "ml",
+    "difficulty": "basic"
+  },
+  {
+    "id": "ml_002",
+    "question": "What is hallucination in large language models?",
+    "ground_truth": "Hallucination in LLMs is the generation of content that is factually incorrect, fabricated, or not grounded in the provided context. It occurs because LLMs are trained to produce plausible-sounding continuations of text, not to verify factual accuracy. Hallucinations can be intrinsic (contradicting source documents) or extrinsic (inventing information not present in any source). RAG systems reduce hallucination by constraining generation to retrieved context, but do not eliminate it — the model can still misinterpret or extrapolate beyond context.",
+    "source_document": "ml_fundamentals.txt",
+    "category": "ml",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "ml_003",
+    "question": "What is the difference between fine-tuning and RAG for knowledge injection?",
+    "ground_truth": "Fine-tuning updates a model's weights on a domain-specific dataset, baking knowledge into parametric memory. It requires expensive training compute, and the knowledge becomes static until the next fine-tuning run. RAG retrieves knowledge from an external store at inference time without modifying weights. RAG is cheaper to update (add documents, no retraining), more auditable (you can inspect what was retrieved), and better for frequently changing knowledge. Fine-tuning is better for injecting style, format, and reasoning patterns rather than factual knowledge.",
+    "source_document": "ml_fundamentals.txt",
+    "category": "ml",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "ml_004",
+    "question": "What is temperature in LLM inference and when should it be set to zero?",
+    "ground_truth": "Temperature controls the randomness of token sampling during LLM generation. At temperature=0, the model always selects the highest-probability token, producing deterministic and reproducible output. Higher temperatures sample from a broader distribution, increasing diversity but reducing consistency. Temperature should be set to zero for tasks requiring determinism: data extraction, classification, structured output generation, and fact-based Q&A. It should be higher for creative writing, brainstorming, and tasks where diversity is desirable.",
+    "source_document": "ml_fundamentals.txt",
+    "category": "ml",
+    "difficulty": "basic"
+  },
+  {
+    "id": "cache_001",
+    "question": "What is cache eviction and what are common eviction policies?",
+    "ground_truth": "Cache eviction is the process of removing entries from a cache to make space for new ones when the cache is full. Common policies include: LRU (Least Recently Used — evict the entry not accessed for the longest time), LFU (Least Frequently Used — evict the entry accessed least often), FIFO (First In First Out — evict the oldest entry regardless of access pattern), MRU (Most Recently Used — evict the most recently accessed entry, useful for scanning workloads), and Random (evict a random entry, simple but unpredictable). LRU is the most widely used default.",
+    "source_document": "caching.txt",
+    "category": "caching",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "cache_002",
+    "question": "What is cache stampede and how do you prevent it?",
+    "ground_truth": "Cache stampede (or thundering herd) occurs when a heavily accessed cache entry expires and many concurrent requests simultaneously attempt to regenerate it, overwhelming the backend. Prevention strategies include: probabilistic early expiration (refresh the cache slightly before it expires with some probability), mutex locking (only one request regenerates the cache while others wait), background refresh (refresh cache asynchronously before expiry), and stale-while-revalidate (serve the stale entry while refreshing in the background).",
+    "source_document": "caching.txt",
+    "category": "caching",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "cache_003",
+    "question": "What is a semantic cache in the context of LLM applications?",
+    "ground_truth": "A semantic cache stores LLM query-response pairs and retrieves cached responses for new queries that are semantically similar to previously answered ones, rather than requiring exact string matches. The incoming query is embedded, and its embedding is compared via cosine similarity against stored query embeddings. If similarity exceeds a threshold, the cached response is returned without invoking the LLM. This reduces latency and cost for repetitive queries in knowledge base and chatbot applications.",
+    "source_document": "caching.txt",
+    "category": "caching",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "obs_001",
+    "question": "What is the difference between logging, metrics, and traces in observability?",
+    "ground_truth": "Logging captures discrete events with context — what happened, when, and with what data. Metrics are numerical measurements aggregated over time — request count, latency percentiles, error rates. Traces follow a request across service boundaries, recording each hop with timing (spans). Together they form the observability triangle: logs explain what happened, metrics show trends and alert on thresholds, traces diagnose where latency or failures occurred in distributed request flows.",
+    "source_document": "observability.txt",
+    "category": "observability",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "obs_002",
+    "question": "What is structured logging and why is it preferred over plain text logs?",
+    "ground_truth": "Structured logging emits log entries as machine-parseable key-value pairs (typically JSON) rather than plain text strings. Plain text logs require complex regex parsing to extract fields for querying. Structured logs are directly queryable by log aggregation systems (CloudWatch, Datadog, Elasticsearch), enable filtering and alerting on specific fields, maintain consistent schema across services, and are more suitable for programmatic analysis. The overhead of JSON serialization is negligible compared to the operational value.",
+    "source_document": "observability.txt",
+    "category": "observability",
+    "difficulty": "basic"
+  },
+  {
+    "id": "obs_003",
+    "question": "What is a health check endpoint and what should it verify?",
+    "ground_truth": "A health check endpoint is an HTTP endpoint (typically GET /health) that reports whether the application and its dependencies are functioning correctly. It should verify: the application process is running, all required external dependencies (databases, caches, message queues) are reachable, and critical internal state is valid. A health check that always returns 200 regardless of dependency state is worse than none — it misleads load balancers and orchestrators into routing to unhealthy instances.",
+    "source_document": "observability.txt",
+    "category": "observability",
+    "difficulty": "basic"
+  },
+  {
+    "id": "sec_001",
+    "question": "What is SQL injection and how is it prevented?",
+    "ground_truth": "SQL injection is an attack where malicious SQL code is inserted into a query parameter, causing the database to execute unintended commands. It can expose, modify, or delete data and in some configurations execute system commands. Prevention requires: parameterized queries (prepared statements) that separate SQL code from data, ORM frameworks that use parameterized queries by default, input validation to reject unexpected characters, and least-privilege database accounts so injected commands have limited impact.",
+    "source_document": "security.txt",
+    "category": "security",
+    "difficulty": "basic"
+  },
+  {
+    "id": "sec_002",
+    "question": "What is the difference between symmetric and asymmetric encryption?",
+    "ground_truth": "Symmetric encryption uses the same key for encryption and decryption. It is fast and suitable for encrypting large amounts of data, but key distribution is a challenge — both parties must securely share the same key. Asymmetric encryption uses a public-private key pair: data encrypted with the public key can only be decrypted with the private key and vice versa. It solves key distribution but is computationally expensive. TLS uses asymmetric encryption during the handshake to securely exchange a symmetric session key, then switches to symmetric encryption for bulk data transfer.",
+    "source_document": "security.txt",
+    "category": "security",
+    "difficulty": "intermediate"
+  },
+  {
+    "id": "sec_003",
+    "question": "What is JWT and what are its security considerations?",
+    "ground_truth": "A JSON Web Token (JWT) is a compact, URL-safe token format consisting of a header, payload, and signature. The payload contains claims (user ID, roles, expiration). The signature verifies the token was issued by a trusted source. Security considerations include: use asymmetric signing (RS256) for public verification without sharing secrets, always validate the expiration claim, use short expiry times and refresh tokens for long sessions, never store sensitive data in the payload (it is base64-encoded, not encrypted), and reject tokens signed with the none algorithm.",
+    "source_document": "security.txt",
+    "category": "security",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "python_001",
+    "question": "What is the difference between asyncio and threading in Python?",
+    "ground_truth": "Asyncio is cooperative multitasking within a single thread using an event loop. Coroutines yield control explicitly with await, making it suitable for I/O-bound tasks where concurrency comes from waiting, not parallel computation. Threading uses OS threads that can run concurrently but are constrained by the GIL in CPython — only one thread executes Python bytecode at a time. Threading is suitable for I/O-bound tasks that use blocking calls. For CPU-bound parallelism, multiprocessing bypasses the GIL by using separate processes.",
+    "source_document": "python_internals.txt",
+    "category": "python",
+    "difficulty": "advanced"
+  },
+  {
+    "id": "python_002",
+    "question": "What is a context manager in Python and when should you use one?",
+    "ground_truth": "A context manager is an object that defines setup and teardown logic executed when entering and exiting a with block, using __enter__ and __exit__ methods (or the @contextmanager decorator for generator-based implementation). Use context managers when a resource must be reliably released after use: file handles, database connections, locks, network sockets, and temporary state changes. They guarantee cleanup even when exceptions occur, making them the correct pattern for resource management rather than try/finally blocks.",
+    "source_document": "python_internals.txt",
+    "category": "python",
+    "difficulty": "basic"
+  }
+]
